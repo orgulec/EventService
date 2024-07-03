@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en" >
-<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">-->
-
-<head>
-    <meta charset="UTF-8">
-    <title>Events</title>
-    <link rel="stylesheet" href="/css/event.css" th:href="@{/css/event.css}">
-</head>
+<head th:replace="~{fragments/head :: head}"></head>
 
 <body>
-    <h3>Elo w eventerze! Pozdro 600!</h3>
-    <div>
-        <div>
-            <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
-        </div>
-<!--        <div th:if="${resut.size>0}"></div>-->
+    <div class="box">
+        <h3>Events</h3>
+        <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
         <div th:text="${result}"></div>
     </div>
 </body>
 
-<footer>
-    <div th:replace="~{fragments/footer :: footer}"></div>
-</footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>

@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head th:replace="~{fragments/head :: head}"></head>
+
 <body>
-$END$
+    <div class="box">
+        <h3>Welcome in Eventer Service API!</h3>
+        <div>
+            <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+            <p>Just look for best events in your localization and sing in it!</p>
+        </div>
+    </div>
 </body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>

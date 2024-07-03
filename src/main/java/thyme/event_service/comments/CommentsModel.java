@@ -1,24 +1,37 @@
-package thyme.event_service;
+package thyme.event_service.comments;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
+import thyme.event_service.event.EventModel;
+import thyme.event_service.user.UserModel;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "comments")
 public class CommentsModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserModel author;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private EventModel event;
 
     private String message;
     private Integer rating;
+    private LocalDateTime date;
+
+    public String getDate(){
+        return date.format(DateTimeFormatter.ofPattern("hh:mm dd.MM.yy"));
+    }
 
 }

@@ -1,4 +1,4 @@
-package thyme.event_service;
+package thyme.event_service.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
