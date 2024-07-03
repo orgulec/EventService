@@ -1,0 +1,29 @@
+body{
+    background-color: #b7b7b7;
+    color: #2f2f2f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, serif;
+}
+.tableOne{
+    border: solid gray 1px;
+    table-border-color-dark: black;
+    font-size: small;
+    justify-content: center;
+    padding: 5px;
+}
+table{
+    text-align: center;
+}
+#links{
+    font-size: small;
+    font-weight: bold;
+    color: purple;
+    display: flex;
+    justify-content: center;
+}
+a{
+    color: #242062;
+}
