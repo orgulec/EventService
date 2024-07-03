@@ -1,10 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head th:replace="~{fragments/head :: head}"></head>
+
 <body>
-$END$
+<div class="box">
+    <h3>Add new Event</h3>
+        <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+        <div>
+            <form th:action="@{/events/add}" th:object="${newEvent}" method="POST">
+                <table class="inputTab">
+                    <tr>
+                        <td class="left">
+                            Title:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="title" th:field="*{title}">
+                                <ul th:if="${#fields.hasErrors('title')}">
+                                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}">Incorrect title!</li>
+                                </ul>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Country:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="country" th:field="*{country}">
+                                <ul th:if="${#fields.hasErrors('country')}">
+                                    <li th:each="err : ${#fields.errors('country')}" th:text="${err}">Incorrect country!</li>
+                                </ul>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            City:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="city" th:field="*{city}">
+                                <ul th:if="${#fields.hasErrors('city')}">
+                                    <li th:each="err : ${#fields.errors('city')}" th:text="${err}">Incorrect data!</li>
+                                </ul>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Street:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="street" th:field="*{street}">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Number:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="number" th:field="*{number}">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Cost:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="number" name="cost" th:field="*{cost}">
+                                <ul th:if="${#fields.hasErrors('cost')}">
+                                    <li th:each="err : ${#fields.errors('cost')}" th:text="${err}">Incorrect value!</li>
+                                </ul>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Date:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="datetime-local" name="date" th:field="*{date}">
+                                <ul th:if="${#fields.hasErrors('date')}">
+                                    <li th:each="err : ${#fields.errors('date')}" th:text="${err}">Invalid date!</li>
+                                </ul>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Subscriptions:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="radio" name="active" value="true" th:field="*{active}">Yes
+                                <input type="radio" name="active" value="false" th:field="*{active}">No
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Description:
+                        </td>
+                        <td class="right">
+                            <label>
+                                <textarea id="dscr" name="description" placeholder="Type text here..."></textarea>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Create new Event">
+            </form>
+        </div>
+    </div>
 </body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>

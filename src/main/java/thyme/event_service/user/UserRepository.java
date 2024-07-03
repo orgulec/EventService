@@ -1,4 +1,4 @@
-package thyme.event_service;
+package thyme.event_service.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

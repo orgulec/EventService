@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head th:replace="~{fragments/head :: head}"></head>
+
 <body>
-$END$
+    <div class="box">
+        <h3>[[${result.title}]]</h3>
+            <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+            <div th:if="${result}">
+                <table class="doubleTable">
+                    <tr>
+                        <td class="left">Description:</td>
+                        <td class="right">[[${result.description}]]</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Address:</td>
+                        <td class="right">[[${result.address}]]</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Organisation:</td>
+                        <td class="right"><a th:href="@{'/user/' + ${result.getOwnerId}}">[[${result.owner}]]</a> </td>
+                    </tr>
+                    <tr>
+                        <td class="left">Date:</td>
+                        <td class="right">[[${result.getDate}]]</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Price:</td>
+                        <td class="right">[[${result.cost}]] PLN</td>
+                    </tr>
+                    <tr th:if="${result.active==true}">
+                        <td class="left">Subscribe:</td>
+                        <td class="right">
+<!--                            <p th:if="${!result.getSubscribers().contains(user)}">-->
+                            <form th:action="@{'/events/'+${result.getId()}+'/signing'}" method="POST">
+                                <input type="submit" value="Sign me in!">
+                            </form>
+<!--                            </p>-->
+<!--                            <p th:if="${result.getSubscribers().contains(user)}" class="redText">Yes!</p>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">Comments:<br>
+                            <form th:action="@{'/comments/read/'+${result.id}}" method="GET">
+                                <input type="submit" value="Show all">
+                            </form>
+<!--                            <form th:action="@{'/comments/new/'+${result.id}}" method="GET">-->
+<!--                                <input type="submit" value="Write">-->
+<!--                            </form>-->
+                        </td>
+                        <td class="right">
+                            <div class="comment" th:each="comm : ${result.comments}">
+                                <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.nickname}]]:</a>
+                                <span class="description2" th:text="' ('+${comm.getDate()}+')'"></span>
+                                <p class="description" th:text="${comm.message}"></p>
+                                <p class="additional" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+            </div>
+        </div>
 </body>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>
