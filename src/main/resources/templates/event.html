@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td class="left">Date:</td>
-                        <td class="right">[[${result.getDate}]]</td>
+                        <td class="right">[[${result.getDateFormatted}]]</td>
                     </tr>
                     <tr>
                         <td class="left">Price:</td>
@@ -51,9 +51,9 @@
                         <td class="right">
                             <div class="comment" th:each="comm : ${result.comments}">
                                 <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.nickname}]]:</a>
-                                <span class="description2" th:text="' ('+${comm.getDate()}+')'"></span>
+                                <span class="description2" th:text="' ('+${comm.getDateFormatted()}+')'"></span>
                                 <p class="description" th:text="${comm.message}"></p>
-                                <p class="additional" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
+                                <p th:if="${comm.rating>0}" class="additional" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
                             </div>
                         </td>
                     </tr>

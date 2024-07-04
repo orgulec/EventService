@@ -9,7 +9,7 @@ import thyme.event_service.user.UserModel;
 import java.time.LocalDateTime;
 @Data
 public class NewCommentDto {
-    @Range(min = 1L, max = 10L, message = "Rating should be from 1 to 10")
+    @Range(min = 0, max = 10L, message = "Rating should be from 1 to 10")
     Integer rating=0;
     @NotBlank(message = "Message is necessary")
     String message;

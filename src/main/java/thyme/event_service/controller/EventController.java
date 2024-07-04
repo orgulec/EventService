@@ -18,12 +18,11 @@ public class EventController {
     @GetMapping
     public String choose(final ModelMap modelMap){
         modelMap.addAttribute("result", "Just peek what do you need...");
-//        return "redirect:/event";
         return "events";
     }
     @GetMapping("/hello")
     public String sayHello(final ModelMap modelMap){
-        String welcomeText = "Welcome in EventService - simple web application to manage events.<br>Here You can create new events, search for interesting event, write comments, add ratings and more!";
+        String welcomeText = "Welcome in EventService - simple web application to manage events.\nHere You can create new events, search for interesting event, write comments, add ratings and more!";
         modelMap.addAttribute("result", welcomeText);
         return "events";
     }
@@ -51,7 +50,7 @@ public class EventController {
     @PostMapping("/{id}/signing")
     public String signIn(ModelMap modelMap, @PathVariable long id){
         modelMap.addAttribute("result", eventService.signMeIn(id));
-        return "redirect:/events"+'/'+id;
+        return "redirect:/events/{id}";
     }
     @GetMapping("/new")
     public String newEvent(@ModelAttribute("newEvent") NewEventDto newEvent){
@@ -61,7 +60,7 @@ public class EventController {
     public String addEvent(@Valid @ModelAttribute("newEvent") NewEventDto newEvent, ModelMap modelMap){
         modelMap.addAttribute("result", newEvent);
         EventModel event = eventService.addEvent(newEvent);
-        return "redirect:/events"+'/'+event.getId();
+        return "redirect:/events/"+event.getId();
     }
 
 

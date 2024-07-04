@@ -1,6 +1,7 @@
 package thyme.event_service.dto;
 
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
@@ -18,10 +19,10 @@ public class NewEventDto {
     String city;
     String street = "";
     String number = "";
-    @Future(message = "Date must be from future.")
-    LocalDateTime date = LocalDateTime.now();
+    @FutureOrPresent(message = "Date must be from future.")
+    LocalDateTime date;
     @PositiveOrZero(message = "Price should by 0 or higher")
-    Double cost = 0.00;
+    Double cost = 0.0;
 
     Boolean active;
 }

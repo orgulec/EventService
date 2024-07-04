@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01_create_table_users
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/01_create_table_users.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 02_create_table_events
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/02_create_table_events.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 03_create_table_comments
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/03_create_table_comments.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 04_create_table_users_subscriptions
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/04_create_table_users_subscriptions.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+
+  - changeSet:
+      id: 11_insert_into_users
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/11_insert_into_users.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 12_insert_into_events
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/12_insert_into_events.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 13_insert_into_comments
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/13_insert_into_comments.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

@@ -1,64 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="~{fragments/head :: head}"></head>
 
 <body>
-    <div class="box">
-        <h3>Events list</h3>
-            <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+<div class="box">
+    <h3>Events list</h3>
+    <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
 
-            <div class="searchBelt">
-                <span class="left">
-                        Today: 08:48 20.08.24
-                    </span>
-                <form th:action="@{/events/search}" method="get">
-                    <span class="right">
-                        <label>
-                            <input type="text" name="toFind" placeholder="Type text for search...">
-                            <input type="submit" value="&#10233;">
-                        </label>
-                    </span>
-                </form>
-            </div>
-
-            <div th:if="${result.size() > 0}">
-                <table class="tableOne">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Free</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="event : ${result}">
-                        <td>[[${event.id}]]</td>
-                        <td><a th:href="@{'/events/' + ${event.id}}">[[${event.title}]]</a></td>
-                        <td>[[${event.getDate}]]</td>
-                        <td>[[${event.address}]]</td>
-                        <td>
-                            <p th:if="${event.cost>0}">No</p>
-                            <p th:if="${event.cost==0}" class="redText">Yes!</p>
-                        </td>
-                    </tr>
-        <!--                <td>-->
-        <!--                    <a th:if="${event.active == true}" class="fa-regular fa-square-check"-->
-        <!--                       th:href="@{'/event/' + ${event.id} + '/active/false'}" title="Disable this event"></a>-->
-        <!--                    <a th:if="${event.active == false}" class="fa-regular fa-square icon-dark"-->
-        <!--                       th:href="@{'/event/' + ${event.id} + '/active/true'}" title="Enable this event"></a>-->
-        <!--                <td>-->
-        <!--                    <a th:href="@{'/tutorials/' + ${tutorial.id}}" title="Edit this tutorial"-->
-        <!--                       class="fa-regular fa-pen-to-square icon-dark"></a>-->
-        <!--                    &nbsp;-->
-        <!--                    <a th:href="@{'/tutorials/delete/' + ${tutorial.id}}" th:tutorialTitle="${tutorial.title}" id="btnDelete"-->
-        <!--                       title="Delete this tutorial" class="fa-regular fa-trash-can icon-dark btn-delete"></a>-->
-        <!--                </td>-->
-                    </tbody>
-                </table>
-            </div>
+    <div class="searchBelt">
+        <span class="left" id="clock"></span>
+        <form th:action="@{/events/search}" method="GET">
+            <span class="right">
+                <label>
+                    <input type="text" name="toFind" placeholder="Type text for search...">
+                    <input type="submit" value="&#10233;">
+                </label>
+            </span>
+        </form>
     </div>
+
+    <div th:if="${result.size() > 0}">
+        <table class="tableOne">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Free</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event : ${result}">
+                <td>[[${event.id}]]</td>
+                <td><a th:href="@{'/events/' + ${event.id}}">[[${event.title}]]</a></td>
+                <td>[[${event.getDateFormatted}]]</td>
+                <td>[[${event.address}]]</td>
+                <td>
+                    <p th:if="${event.cost>0}">No</p>
+                    <p th:if="${event.cost==0}" class="redText">Yes!</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let clock = document.getElementById("clock");
+    setInterval(setTime, 1000);
+
+    function setTime() {
+        let time = new Date();
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const currentDayOfWeek = daysOfWeek[time.getDay()];
+        clock.innerHTML = "Today it's " + currentDayOfWeek + ", " + time.getDay() + "." + time.getMonth() + "." + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "<br>";
+    }
+</script>
+
 </body>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

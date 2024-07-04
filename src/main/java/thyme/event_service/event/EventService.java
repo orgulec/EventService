@@ -33,16 +33,20 @@ public class EventService {
         return event.get();
     }
 
-    public EventModel signMeIn(long id) {
-        EventModel event = getById(id);
+    public EventModel signMeIn(long eventId) {
+        EventModel event = getById(eventId);
 
         UserModel user = userRepository.findById(1l).get(); //todo authorisation & authentication
 
         if(!event.getSubscribers().contains(user)) {
             event.getSubscribers().add(user);
+            user.getSubscriptions().add(event);
+            userRepository.save(user);
             return eventRepository.save(event);
         } else {
             event.getSubscribers().remove(user);
+            user.getSubscriptions().remove(event);
+            userRepository.save(user);
             return eventRepository.save(event);
         }
     }
@@ -67,7 +71,8 @@ public class EventService {
         Address address = new Address(eventDto.getCity(), eventDto.getStreet(), eventDto.getNumber(), eventDto.getCountry());
         EventModel newEvent = new EventModel();
 
-        newEvent.setOwner(userRepository.findById(1l).get()); //todo authorisation & authentication
+        UserModel user = userRepository.findById(1l).get();
+        newEvent.setOwner(user); //todo authorisation & authentication
 
             newEvent.setAddress(address);
             newEvent.setTitle(eventDto.getTitle());
@@ -78,6 +83,10 @@ public class EventService {
 
             newEvent.setComments(new ArrayList<>());
             newEvent.setSubscribers(new HashSet<>());
+
+        user.getMyEvents().add(newEvent);
+        userRepository.save(user);
+
         return eventRepository.save(newEvent);
     }
 }
