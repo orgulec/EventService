@@ -1,15 +1,17 @@
 
 <div th:fragment="all">
-    <div th:if="${readComments.size()>0}" class="comment" th:each="comm : ${readComments}">
-        <table>
+    <h3 th:if="${readComments.size()>0}">[[${readComments.get(0).event.title}]]</h3>
+    <h3 th:if="${readComments.size()<1}">Comments are empty...</h3>
+    <div th:if="${readComments.size()>0}" th:each="comm : ${readComments}">
+        <table class="comment">
             <tr>
                 <td class="left">
                     <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.nickname}]]:</a>
-                    <p class="description2" th:text="${comm.getDate()}"></p>
-                    <p class="description2" th:utext="'Rating: ' + ${comm.rating} + '/10'"></p>
+                    <p class="description2" th:text="${comm.getDateFormatted()}"></p>
+                    <p th:if="${comm.rating>0}" class="description2" th:utext="'Rating: ' + ${comm.rating} + '/10'"></p>
                 </td>
                 <td class="right">
-                    <p class="description" th:text="${comm.message}"></p>
+                    <div class="description" th:text="${comm.message}"></div>
                 </td>
             </tr>
         </table>

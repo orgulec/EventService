@@ -8,17 +8,23 @@
                 </td>
                 <td class="right">
                     <label>
-                        <input type="number" name="rating" placeholder="Set number...">
-<!--                    <input type="number" name="rating" th:field="*{rating}" placeholder="Set number...">-->
-<!--                    <ul th:if="${#fields.hasErrors('rating')}">-->
-<!--                         <li th:each="err : ${#fields.errors('rating')}" th:text="${err}">Incorrect value!</li>-->
-<!--                    </ul>-->
+                        <input type="radio" name="rating" value="1"> 1
+                        <input type="radio" name="rating" value="2"> 2
+                        <input type="radio" name="rating" value="3"> 3
+                        <input type="radio" name="rating" value="4"> 4
+                        <input type="radio" name="rating" value="5"> 5
+                        <input type="radio" name="rating" value="6"> 6
+                        <input type="radio" name="rating" value="7"> 7
+                        <input type="radio" name="rating" value="8"> 8
+                        <input type="radio" name="rating" value="9"> 9
+                        <input type="radio" name="rating" value="10"> 10
                     </label>
                 </td>
             </tr>
             <tr>
                 <td class="left">
-                    Comment:
+                    Comment:<br>
+                    <input type="submit" value="Add comment">
                 </td>
                 <td class="right">
                     <label>
@@ -27,6 +33,5 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Add comment">
     </form>
 </div>

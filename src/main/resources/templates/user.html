@@ -36,7 +36,7 @@
                             <div class="comment" th:each="ev : ${result.myEvents}">
                                 <a class="owner" th:href="@{'/events/' + ${ev.id}}">[[${ev.title}]]</a>
                                 <p class="description" th:text="'Location: ' + ${ev.address}"></p>
-                                <p class="description" th:text="'Date: ' + ${ev.getDate()}"></p>
+                                <p class="description" th:text="'Date: ' + ${ev.getDateFormatted()}"></p>
                                 <p class="description" th:text="${'Subscriptions: ' + ev.active}"></p>
                             </div>
                         </td>
@@ -46,7 +46,7 @@
                         <td class="right">
                             <div class="comment" th:each="comm : ${result.comments}">
                                 <a class="owner" th:href="@{'/events/' + ${comm.event.id}}">[[${comm.event.title}]]</a>
-                                <span class="description2" th:text="' ('+${comm.getDate()}+')'"></span>
+                                <span class="description2" th:text="' ('+${comm.getDateFormatted()}+')'"></span>
                                 <p class="description" th:text="${comm.message}"></p>
                                 <p class="description" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
                             </div>

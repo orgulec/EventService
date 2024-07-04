@@ -30,7 +30,7 @@ public class CommentsModel {
     private Integer rating;
     private LocalDateTime date;
 
-    public String getDate(){
+    public String getDateFormatted(){
         return date.format(DateTimeFormatter.ofPattern("hh:mm dd.MM.yy"));
     }
 

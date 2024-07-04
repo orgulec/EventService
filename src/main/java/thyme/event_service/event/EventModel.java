@@ -33,13 +33,13 @@ public class EventModel {
     private boolean active;
 
     @OneToMany(mappedBy = "event")
-    private List<CommentsModel> comments = new ArrayList<>();
+    private List<CommentsModel> comments;// = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subscriptions")
-    private Set<UserModel> subscribers = new HashSet<>();
+    private Set<UserModel> subscribers;// = new HashSet<>();
 
 
-    public String getDate(){
+    public String getDateFormatted(){
         return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
     }
 
