@@ -20,10 +20,10 @@ public class CommentsModel {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserModel author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private EventModel event;
 
     private String message;

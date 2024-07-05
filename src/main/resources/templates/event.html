@@ -32,8 +32,8 @@
                         <td class="left">Subscribe:</td>
                         <td class="right">
 <!--                            <p th:if="${!result.getSubscribers().contains(user)}">-->
-                            <form th:action="@{'/events/'+${result.getId()}+'/signing'}" method="POST">
-                                <input type="submit" value="Sign me in!">
+                            <form th:action="@{'/events/subscribe/'+${result.getId()}}" method="POST">
+                                <input type="submit" id="button2" value="Sign me in!">
                             </form>
 <!--                            </p>-->
 <!--                            <p th:if="${result.getSubscribers().contains(user)}" class="redText">Yes!</p>-->
@@ -42,11 +42,8 @@
                     <tr>
                         <td class="left">Comments:<br>
                             <form th:action="@{'/comments/read/'+${result.id}}" method="GET">
-                                <input type="submit" value="Show all">
+                                <input type="submit" id="button1" value="Show all">
                             </form>
-<!--                            <form th:action="@{'/comments/new/'+${result.id}}" method="GET">-->
-<!--                                <input type="submit" value="Write">-->
-<!--                            </form>-->
                         </td>
                         <td class="right">
                             <div class="comment" th:each="comm : ${result.comments}">
@@ -61,6 +58,17 @@
                 <hr>
             </div>
         </div>
+    <script>
+        let btn1 = document.getElementById("button1");
+        let btn2 = document.getElementById("button2");
+
+        changeBorderButton(btn1);
+        changeBorderButton(btn2);
+        function changeBorderButton(btn){
+            btn.addEventListener('mouseover', f => btn.classList.add("mouseover"));
+            btn.addEventListener('mouseout', f => btn.classList.remove("mouseover"));
+        }
+    </script>
 </body>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>

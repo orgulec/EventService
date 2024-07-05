@@ -9,8 +9,8 @@ body{
     font-family: Arial, serif;
 }
 .box{
-    max-width: 90%;
-    min-width: 60%;
+    max-width: 85%;
+    min-width: 66%;
     margin-top: 15px;
     margin-left: 15%;
     margin-right: 15%;
@@ -79,7 +79,7 @@ span.right{
     color: grey;
 }
 td label textarea{
-    width: 90%;
+    width: 80%;
     height: 120px;
     padding: 8px 8px;
     box-sizing: border-box;
@@ -95,6 +95,10 @@ input, textarea{
     padding: 2px;
     font-size: small;
     background-color: #e4e7e7;
+}
+form > input.mouseover{
+    border: solid darkcyan 2px;
+    box-shadow: #868686 2px 2px 3px;
 }
 #links{
     padding-top: 7px;
@@ -145,8 +149,12 @@ a{
     font-weight: 600;
     text-decoration: unset;
 }
+.warn{
+    color: red;
+    font-size: xx-small;
+}
 .redText{
-    color: #c50a0a;
+    color: #006060;
     font-weight: 600;
 }
 h3{

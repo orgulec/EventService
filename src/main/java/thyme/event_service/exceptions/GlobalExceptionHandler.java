@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
         ModelAndView mav = new ModelAndView();
         ex.printStackTrace();
         mav.addObject("errorMessage", ex.getMessage());
-        mav.setViewName("notFound");
+        mav.setViewName("/errors/notFound");
         return mav;
     }
     @ExceptionHandler(NoSuchElementException.class)
@@ -23,7 +23,15 @@ public class GlobalExceptionHandler {
         ModelAndView mav = new ModelAndView();
         ex.printStackTrace();
         mav.addObject("errorMessage", ex.getMessage());
-        mav.setViewName("notFound");
+        mav.setViewName("/errors/notFound");
+        return mav;
+    }
+    @ExceptionHandler(WrongInputDtoException.class)
+    public ModelAndView handleWrongInputDtoException(WrongInputDtoException ex){
+        ModelAndView mav = new ModelAndView();
+        ex.printStackTrace();
+        mav.addObject("errorMessage", ex.getMessage());
+        mav.setViewName("/errors/notFound");
         return mav;
     }
 

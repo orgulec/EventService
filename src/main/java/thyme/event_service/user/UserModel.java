@@ -29,13 +29,13 @@ public class UserModel {
     private Integer age;
 
     @OneToMany(mappedBy = "owner")
-    private Set<EventModel> myEvents;// = new HashSet<>();
+    private Set<EventModel> myEvents;
 
     @OneToMany(mappedBy = "author")
-    private List<CommentsModel> comments;// = new ArrayList<>();
+    private List<CommentsModel> comments;
 
-    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)//, mappedBy = "subscribers")
-    private Set<EventModel> subscriptions;// = new HashSet<>();
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)//, mappedBy = "subscribers")
+    private Set<EventModel> subscriptions;
 
     public String getUserData(){
         return "Nick: "+nickname +

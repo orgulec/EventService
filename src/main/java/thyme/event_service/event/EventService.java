@@ -1,11 +1,13 @@
 package thyme.event_service.event;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.type.SortedSetType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thyme.event_service.dto.NewEventDto;
+import thyme.event_service.exceptions.WrongInputDtoException;
 import thyme.event_service.user.UserModel;
 import thyme.event_service.user.UserRepository;
 
@@ -41,14 +43,12 @@ public class EventService {
         if(!event.getSubscribers().contains(user)) {
             event.getSubscribers().add(user);
             user.getSubscriptions().add(event);
-            userRepository.save(user);
-            return eventRepository.save(event);
         } else {
             event.getSubscribers().remove(user);
             user.getSubscriptions().remove(event);
-            userRepository.save(user);
-            return eventRepository.save(event);
         }
+//        userRepository.save(user);
+        return eventRepository.saveAndFlush(event);
     }
 
     public List<EventModel> getByText(String toFind) {
@@ -68,6 +68,7 @@ public class EventService {
     }
 
     public EventModel addEvent(NewEventDto eventDto) {
+
         Address address = new Address(eventDto.getCity(), eventDto.getStreet(), eventDto.getNumber(), eventDto.getCountry());
         EventModel newEvent = new EventModel();
 

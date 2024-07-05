@@ -28,7 +28,8 @@
                 </td>
                 <td class="right">
                     <label>
-                        <textarea id="dscr" name="message" placeholder="Type text here..."></textarea>
+                        <textarea id="dscr" name="message" th:field="*{message}" placeholder="Type text here..."></textarea>
+                        <span class="warn" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
                     </label>
                 </td>
             </tr>

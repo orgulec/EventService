@@ -21,7 +21,7 @@ public class EventModel {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserModel owner;
 
     private String title;

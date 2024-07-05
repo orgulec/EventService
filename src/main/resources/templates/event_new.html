@@ -11,40 +11,34 @@
                 <table class="inputTab">
                     <tr>
                         <td class="left">
-                            Title:
+                            *Title:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="text" name="title" th:field="*{title}">
-                                <ul th:if="${#fields.hasErrors('title')}">
-                                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}">Incorrect title!</li>
-                                </ul>
+                                <span class="warn" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">
-                            Country:
+                            *Country:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="text" name="country" th:field="*{country}">
-                                <ul th:if="${#fields.hasErrors('country')}">
-                                    <li th:each="err : ${#fields.errors('country')}" th:text="${err}">Incorrect country!</li>
-                                </ul>
+                                <span class="warn" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">
-                            City:
+                            *City:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="text" name="city" th:field="*{city}">
-                                <ul th:if="${#fields.hasErrors('city')}">
-                                    <li th:each="err : ${#fields.errors('city')}" th:text="${err}">Incorrect data!</li>
-                                </ul>
+                                <span class="warn" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
                             </label>
                         </td>
                     </tr>
@@ -70,56 +64,63 @@
                     </tr>
                     <tr>
                         <td class="left">
-                            Cost:
+                            Price:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="number" name="cost" th:field="*{cost}">
-                                <ul th:if="${#fields.hasErrors('cost')}">
-                                    <li th:each="err : ${#fields.errors('cost')}" th:text="${err}">Incorrect value!</li>
-                                </ul>
+                                <span class="warn" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">
-                            Date:
+                            *Date:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="datetime-local" name="date" th:field="*{date}">
-<!--                                <ul th:if="${#fields.hasErrors('date')}">-->
-<!--                                    <li th:each="err : ${#fields.errors('date')}" th:text="${err}">Invalid date!</li>-->
-<!--                                </ul>-->
+                                <span class="warn" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">
-                            Subscriptions:
+                            *Subscriptions:
                         </td>
                         <td class="right">
                             <label>
                                 <input type="radio" name="active" value="true" th:field="*{active}">Yes
                                 <input type="radio" name="active" value="false" th:field="*{active}">No
+                                <span class="warn" th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">
-                            Description:
+                            *Description:
                         </td>
                         <td class="right">
                             <label>
-                                <textarea id="dscr" name="description" placeholder="Type text here..."></textarea>
+                                <textarea id="dscr" name="description"  th:field="*{description}" placeholder="Type text here..."></textarea>
+                                <div class="warn" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
                             </label>
                         </td>
                     </tr>
                 </table>
-                <input type="submit" value="Create new Event">
+                <input type="submit" id="button" value="Create new Event">
             </form>
         </div>
     </div>
+<script>
+    let btn = document.getElementById("button");
+
+    changeBorderButton(btn);
+    function changeBorderButton(b){
+        b.addEventListener('mouseover', f => b.classList.add("mouseover"));
+        b.addEventListener('mouseout', f => b.classList.remove("mouseover"));
+    }
+</script>
 </body>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

@@ -13,7 +13,7 @@
             <span class="right">
                 <label>
                     <input type="text" name="toFind" placeholder="Type text for search...">
-                    <input type="submit" value="&#10233;">
+                    <input type="submit" id="button" value="&#10233;">
                 </label>
             </span>
         </form>
@@ -50,6 +50,13 @@
     let clock = document.getElementById("clock");
     setInterval(setTime, 1000);
 
+    let btn = document.getElementById("button");
+    changeBorderButton(btn);
+
+    function changeBorderButton(b){
+        b.addEventListener('mouseover', f => b.classList.add("mouseover"));
+        b.addEventListener('mouseout', f => b.classList.remove("mouseover"));
+    }
     function setTime() {
         let time = new Date();
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
