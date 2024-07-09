@@ -18,7 +18,7 @@
                     </tr>
                     <tr>
                         <td class="left">Organisation:</td>
-                        <td class="right"><a th:href="@{'/user/' + ${result.getOwnerId}}">[[${result.owner}]]</a> </td>
+                        <td class="right"><a th:href="@{/user/__${result.getOwnerId}__}">[[${result.owner}]]</a> </td>
                     </tr>
                     <tr>
                         <td class="left">Date:</td>
@@ -29,28 +29,27 @@
                         <td class="right">[[${result.cost}]] PLN</td>
                     </tr>
                     <tr th:if="${result.active==true}">
-                        <td class="left">Subscribe:</td>
-                        <td class="right">
-<!--                            <p th:if="${!result.getSubscribers().contains(user)}">-->
-                            <form th:action="@{'/events/'+${result.getId()}+'/signing'}" method="POST">
-                                <input type="submit" value="Sign me in!">
+                        <td class="left">Subscriptions:
+                            <!--                            <p th:if="${!result.getSubscriptions().contains(user)}">-->
+                            <form th:action="@{/events/subscribe/__${result.getId()}__}" method="POST" id = "subscribe">
+                                <input type="submit" id="button2" value="Sign me in!">
                             </form>
-<!--                            </p>-->
-<!--                            <p th:if="${result.getSubscribers().contains(user)}" class="redText">Yes!</p>-->
+                            <!--                            </p>-->
+                            <!--                            <p th:if="${result.getSubscriptions().contains(user)}" class="redText">Yes!</p>-->
+                        </td>
+                        <td class="right">
+                            <p class="description" th:text="'Already signed: ' + ${result.getSubscriptions().size()}"></p>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">Comments:<br>
-                            <form th:action="@{'/comments/read/'+${result.id}}" method="GET">
-                                <input type="submit" value="Show all">
+                            <form th:action="@{/comments/read/__${result.id}__}" method="GET">
+                                <input type="submit" id="button1" value="Show all">
                             </form>
-<!--                            <form th:action="@{'/comments/new/'+${result.id}}" method="GET">-->
-<!--                                <input type="submit" value="Write">-->
-<!--                            </form>-->
                         </td>
                         <td class="right">
                             <div class="comment" th:each="comm : ${result.comments}">
-                                <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.nickname}]]:</a>
+                                <a class="owner" th:href="@{/user/__${comm.author.id}__}">[[${comm.author.nickname}]]:</a>
                                 <span class="description2" th:text="' ('+${comm.getDateFormatted()}+')'"></span>
                                 <p class="description" th:text="${comm.message}"></p>
                                 <p th:if="${comm.rating>0}" class="additional" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
@@ -61,6 +60,19 @@
                 <hr>
             </div>
         </div>
+    <script>
+        let btn1 = document.getElementById("button1");
+        let btn2 = document.getElementById("button2");
+
+        changeBorderButton(btn1);
+        changeBorderButton(btn2);
+
+        let subs = document.getElementById("subscribe");
+        function changeBorderButton(btn){
+            btn.addEventListener('mouseover', f => btn.classList.add("mouseover"));
+            btn.addEventListener('mouseout', f => btn.classList.remove("mouseover"));
+        }
+    </script>
 </body>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </html>
