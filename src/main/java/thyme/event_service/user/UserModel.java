@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import thyme.event_service.comments.CommentsModel;
 import thyme.event_service.event.EventModel;
+import thyme.event_service.subscriptions.SubscriptionModel;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,8 +33,8 @@ public class UserModel {
     @OneToMany(mappedBy = "author")
     private List<CommentsModel> comments;
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)//, mappedBy = "subscribers")
-    private Set<EventModel> subscriptions;
+    @OneToMany(mappedBy = "subscriber")
+    private List<SubscriptionModel> subscriptions;
 
     public String getUserData(){
         return "Nick: "+nickname +

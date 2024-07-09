@@ -56,19 +56,20 @@ public class EventController {
     public String signIn(ModelMap modelMap, @PathVariable long eventId){
         EventModel event = eventService.signMeIn(eventId);
         modelMap.addAttribute("result", event);
-        return "redirect:/events/{id}";
+        return "redirect:/events/"+eventId;
     }
     @GetMapping("/new")
-    public String newEvent(@ModelAttribute("newEvent") NewEventDto newEvent){
+    public String newEvent(final ModelMap modelMap){
+        modelMap.addAttribute("newEvent", new NewEventDto());
         return "event_new";
     }
-    @PostMapping("/add")
+
+    @PostMapping("/new")
     public String addEvent(@Valid @ModelAttribute("newEvent") NewEventDto newEvent, BindingResult bindingResult, ModelMap modelMap){
+        modelMap.addAttribute("result", newEvent);
         if(bindingResult.hasErrors()){
-            modelMap.addAttribute("result", newEvent);
             return "event_new";
         }
-        modelMap.addAttribute("result", newEvent);
         EventModel event = eventService.addEvent(newEvent);
         return "redirect:/events/"+event.getId();
     }

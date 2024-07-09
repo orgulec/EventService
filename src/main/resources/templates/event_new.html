@@ -7,7 +7,7 @@
     <h3>Add new Event</h3>
         <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
         <div>
-            <form th:action="@{/events/add}" th:object="${newEvent}" method="POST">
+            <form th:action="@{/events/new}" th:object="${newEvent}" method="POST">
                 <table class="inputTab">
                     <tr>
                         <td class="left">

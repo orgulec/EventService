@@ -27,11 +27,11 @@ databaseChangeLog:
             splitStatements: true
             stripComments: true
   - changeSet:
-      id: 04_create_table_users_subscriptions
+      id: 04_create_table_subscriptions
       author: postgres
       changes:
         - sqlFile:
-            path: scripts/04_create_table_users_subscriptions.sql
+            path: scripts/04_create_table_subscriptions.sql
             relativeToChangelogFile: true
             splitStatements: true
             stripComments: true
@@ -60,6 +60,15 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: scripts/13_insert_into_comments.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 14_insert_into_subscriptions
+      author: postgres
+      changes:
+        - sqlFile:
+            path: scripts/14_insert_into_subscriptions.sql
             relativeToChangelogFile: true
             splitStatements: true
             stripComments: true

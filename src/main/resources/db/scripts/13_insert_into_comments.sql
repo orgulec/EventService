@@ -8,5 +8,6 @@ VALUES
     (3,'Słabizna! Nie polecam!','2024-07-01T16:44:00.000',1,2),
     (7,'Gituwa i można iść w ciemno!','2024-04-15T17:10:00.000',2,1),
     (9,'Rewelacja! Zabawa po pachy! Nic tylko się zapisywać!!','2024-06-22T19:07:00.000',3,5),
+    (8,'Zabawa po pachy! Nic tylko się zapisywać!! Polecam','2024-06-25T21:07:00.000',5,3),
     (2,'Tragedia... nie polecam','2024-06-12T18:30:00.000',4,6),
     (8,'Jak najbardziej na tak! Warto się zapisać i wziąć udział! Polecam każdemu','2024-07-02T16:25:00.000',6,4)

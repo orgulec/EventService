@@ -1,6 +1,6 @@
 <div th:fragment="addComm">
     <hr>
-    <form th:action="@{'/comments/add/'+${eventId}}" th:object="${newComment}" method="POST">
+    <form th:action="@{'/comments/new/'+${eventId}}" th:object="${newComment}" method="POST">
         <table class="inputTab">
             <tr>
                 <td class="left">
@@ -28,8 +28,9 @@
                 </td>
                 <td class="right">
                     <label>
-                        <textarea id="dscr" name="message" th:field="*{message}" placeholder="Type text here..."></textarea>
-                        <span class="warn" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
+                        <textarea id="dscr" name="message" placeholder="Type text here..."></textarea>
+<!--                        th:field="*{message}"-->
+<!--                        <span class="warn" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>-->
                     </label>
                 </td>
             </tr>

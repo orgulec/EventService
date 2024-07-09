@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface CommentsRepository extends JpaRepository<CommentsModel,Long> {
-//    List<CommentsModel> findAllByEventModel_Id(Long id);
+
     List<CommentsModel> findAllByEvent_Id(Long id);
 }
