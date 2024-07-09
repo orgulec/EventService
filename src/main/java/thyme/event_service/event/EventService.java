@@ -2,21 +2,26 @@ package thyme.event_service.event;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.type.SortedSetType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thyme.event_service.dto.NewEventDto;
+import thyme.event_service.subscriptions.SubscriptionModel;
+import thyme.event_service.subscriptions.SubscriptionService;
 import thyme.event_service.user.UserModel;
 import thyme.event_service.user.UserRepository;
 
-import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class EventService {
     private final EventRepository eventRepository;
+    private final SubscriptionService subscriptionService;
 
     @Autowired
     UserRepository userRepository;
@@ -33,18 +38,17 @@ public class EventService {
         return event.get();
     }
 
-    public EventModel signMeIn(long id) {
-        EventModel event = getById(id);
+    public EventModel signMeIn(long eventId) {
+        EventModel event = getById(eventId);
 
-        UserModel user = userRepository.findById(1l).get(); //todo authorisation & authentication
-
-        if(!event.getSubscribers().contains(user)) {
-            event.getSubscribers().add(user);
-            return eventRepository.save(event);
+        UserModel user = userRepository.findById(1L).get(); //todo authorisation & authentication
+        Optional<SubscriptionModel> subscription = subscriptionService.getByEventAndUser(event, user);
+        if(subscription.isEmpty()){
+            subscriptionService.createSubscription(event, user);
         } else {
-            event.getSubscribers().remove(user);
-            return eventRepository.save(event);
+            subscriptionService.deleteSubscription(event, user);
         }
+        return eventRepository.save(event);
     }
 
     public List<EventModel> getByText(String toFind) {
@@ -64,10 +68,13 @@ public class EventService {
     }
 
     public EventModel addEvent(NewEventDto eventDto) {
+
         Address address = new Address(eventDto.getCity(), eventDto.getStreet(), eventDto.getNumber(), eventDto.getCountry());
         EventModel newEvent = new EventModel();
 
-        newEvent.setOwner(userRepository.findById(1l).get()); //todo authorisation & authentication
+        UserModel user = userRepository.findById(1l).get();
+
+        newEvent.setOwner(user); //todo authorisation & authentication
 
             newEvent.setAddress(address);
             newEvent.setTitle(eventDto.getTitle());
@@ -77,7 +84,11 @@ public class EventService {
             newEvent.setActive(eventDto.getActive());
 
             newEvent.setComments(new ArrayList<>());
-            newEvent.setSubscribers(new HashSet<>());
+            newEvent.setSubscriptions(new ArrayList<>());
+
+        user.getMyEvents().add(newEvent);
+        userRepository.save(user);
+
         return eventRepository.save(newEvent);
     }
 }

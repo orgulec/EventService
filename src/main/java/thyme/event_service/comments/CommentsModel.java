@@ -20,17 +20,17 @@ public class CommentsModel {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserModel author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private EventModel event;
 
     private String message;
     private Integer rating;
     private LocalDateTime date;
 
-    public String getDate(){
+    public String getDateFormatted(){
         return date.format(DateTimeFormatter.ofPattern("hh:mm dd.MM.yy"));
     }
 

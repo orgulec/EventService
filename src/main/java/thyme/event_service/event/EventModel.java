@@ -3,6 +3,7 @@ package thyme.event_service.event;
 import jakarta.persistence.*;
 import lombok.*;
 import thyme.event_service.comments.CommentsModel;
+import thyme.event_service.subscriptions.SubscriptionModel;
 import thyme.event_service.user.UserModel;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class EventModel {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserModel owner;
 
     private String title;
@@ -33,13 +34,13 @@ public class EventModel {
     private boolean active;
 
     @OneToMany(mappedBy = "event")
-    private List<CommentsModel> comments = new ArrayList<>();
+    private List<CommentsModel> comments;
 
-    @ManyToMany(mappedBy = "subscriptions")
-    private Set<UserModel> subscribers = new HashSet<>();
+    @OneToMany(mappedBy = "event")
+    private List<SubscriptionModel> subscriptions;
 
 
-    public String getDate(){
+    public String getDateFormatted(){
         return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
     }
 
@@ -47,5 +48,17 @@ public class EventModel {
         return owner.getId();
     }
 
-
+    @Override
+    public String toString() {
+        return "EventModel{" +
+                "id=" + id +
+                ", owner=" + owner.getNickname() +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", address=" + address +
+                ", cost=" + cost +
+                ", active=" + active +
+                '}';
+    }
 }

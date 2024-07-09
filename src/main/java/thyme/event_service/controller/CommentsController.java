@@ -27,10 +27,11 @@ public class CommentsController {
     @GetMapping("/new/{eventId}")
     public String newComment(@PathVariable Long eventId, ModelMap modelMap){
         modelMap.addAttribute("eventId", eventId);
+        modelMap.addAttribute("newComment",new NewCommentDto());
         return "redirect:/comments/add/{eventId}";
 //        return "comments";
     }
-    @PostMapping("/add/{eventId}")
+    @PostMapping("/new/{eventId}")
     public String addComment(@Valid @ModelAttribute("newComment") NewCommentDto newComment, @PathVariable Long eventId, ModelMap modelMap){
         newComment.setEvent(eventService.getById(eventId));
         modelMap.addAttribute("newComment", newComment);

@@ -1,0 +1,9 @@
+INSERT INTO events (title,description,country,city,street,number,date,cost,active,owner_id)
+VALUES
+    ('Noc muzeów', 'Można se raz w roku pochodzić po muzeach za frajer. A co!', 'Polad','Cracov','Rynek','','2025-12-25T20:00:00.000', 0.00, true, 2),
+    ('Kurs JS dla każdego!','Małopolskie kursy programowania w JavaScript startują już teraz w stolicy Małopolski! Skorzystaj z bezpłatnych zapisów na kurs i zostań programistą!', 'Polad','Cracov','Rusznikarska','4/11','2024-10-01T09:00:00.000', 0.00, true, 1),
+    ('Obrona zamku przed Szwedem','Zamek Tenczyn, jako jeden ze strategicznych gospodarzy po stronie województwa Małopolskiego bierze udział w Juromanii – święcie Jury Krakowsko Częstochowskiej.','Poland','Rudno','Zamkowa','1','2024-08-16T08:30:00.000',99.00,true,3),
+    ('Music Rock Festival','Coroczna imprezka jakich mało w Polsce już teraz w Warszawie!!','Poland','Warsaw','Aleje Ujazdowskie','33','2025-03-20T21:00:00.000',150.00,false,7),
+    ('Science for kids!','Science Kids is the online home of science & technology for children around the world.Learn more with our fun science experiments, cool facts, free games, activities, lesson plans, quizzes, videos, photos and science fair project ideas.','Germany','Berlin','Albertstrasse','82/10','2024-09-02T10:00:00.000',0.00,true,2),
+    ('Rock Poland','Największa rockowa imprezka w Polsce jedzie kolejny rock z rzędu!!!','Poland','Gdansk','Bałtycka','27','2024-07-15T21:30:00.000',99.90,true,7),
+    ('Wodne Wakacje!','Zapraszamy na najlepsze wakacje dla dzieci w poznańskim Aquaparku! Najlepsza okazja by nauczyć się pływać i zrelaksować w czystej wodzie!','Poland','Poznan','Wrocławska','141','2024-07-01T10:00:00.000',0.00,true,4)
