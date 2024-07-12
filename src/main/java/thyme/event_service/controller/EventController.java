@@ -1,5 +1,6 @@
 package thyme.event_service.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,8 @@ public class EventController {
     public String sayBye(final ModelMap modelMap){
         String goodbyeText = "Goodbye and see you soon!";
         modelMap.addAttribute("result", goodbyeText);
-        return "events";
+//        return "events";
+        return "redirect:/logout";
     }
     @GetMapping("/all")
     public String getById(ModelMap modelMap){
@@ -53,9 +55,11 @@ public class EventController {
         return "events_all";
     }
     @PostMapping("/subscribe/{eventId}")
-    public String signIn(ModelMap modelMap, @PathVariable long eventId){
+    public String signIn(ModelMap modelMap, @PathVariable long eventId, HttpSession session){
+        Object attribute = session.getAttribute("sec-fetch-user");
         EventModel event = eventService.signMeIn(eventId);
         modelMap.addAttribute("result", event);
+        modelMap.addAttribute("session", attribute);
         return "redirect:/events/"+eventId;
     }
     @GetMapping("/new")

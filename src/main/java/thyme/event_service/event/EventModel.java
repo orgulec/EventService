@@ -7,7 +7,6 @@ import thyme.event_service.subscriptions.SubscriptionModel;
 import thyme.event_service.user.UserModel;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -52,7 +51,7 @@ public class EventModel {
     public String toString() {
         return "EventModel{" +
                 "id=" + id +
-                ", owner=" + owner.getNickname() +
+                ", owner=" + owner.getUsername() +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", date=" + date +

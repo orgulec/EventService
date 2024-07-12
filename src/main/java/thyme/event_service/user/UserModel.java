@@ -1,11 +1,15 @@
 package thyme.event_service.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import thyme.event_service.comments.CommentsModel;
 import thyme.event_service.event.EventModel;
 import thyme.event_service.subscriptions.SubscriptionModel;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +17,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "users")
 public class UserModel {
     @Id
@@ -20,11 +25,15 @@ public class UserModel {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    private String nickname;
+    @NotBlank
+    private String username;
     private String firstname;
     private String lastname;
+    @NotBlank
     private String password;
+    @NotBlank
     private String email;
+    private String role;
     private Integer age;
 
     @OneToMany(mappedBy = "owner")
@@ -36,8 +45,9 @@ public class UserModel {
     @OneToMany(mappedBy = "subscriber")
     private List<SubscriptionModel> subscriptions;
 
+
     public String getUserData(){
-        return "Nick: "+nickname +
+        return "Nick: "+ username +
                 "\nFirst name: " + firstname +
                 "\nLast name: " + lastname +
                 "\nE-mail: " + email +
@@ -46,7 +56,7 @@ public class UserModel {
 
     @Override
     public String toString() {
-        return nickname + " (" + firstname + " " + lastname + ")";
+        return username + " (" + firstname + " " + lastname + ")";
     }
 
 }

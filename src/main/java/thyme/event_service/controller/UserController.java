@@ -22,4 +22,10 @@ public class UserController {
             modelMap.addAttribute("result", user);
             return "user";
         }
+
+//    @GetMapping(path = "/foo")
+//    public void foo(HttpSession session) {
+//        String sessionId = session.getId();
+//        session.toString();
+//    }
 }
