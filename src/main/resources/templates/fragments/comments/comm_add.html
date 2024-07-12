@@ -1,6 +1,6 @@
 <div th:fragment="addComm">
     <hr>
-    <form th:action="@{'/comments/new/'+${eventId}}" th:object="${newComment}" method="POST">
+    <form th:action="@{/comments/new/__${eventId}__}" th:object="${newComment}" method="POST">
         <table class="inputTab">
             <tr>
                 <td class="left">
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td class="left">
-                    Comment:<br>
+                    *Comment:<br>
                     <input type="submit" value="Add comment">
                 </td>
                 <td class="right">

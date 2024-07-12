@@ -18,4 +18,11 @@ public class UserService {
         }
         return user.get();
     }
+    public UserModel getByUsername(String username) {
+        Optional<UserModel> user = userRepository.findByUsername(username);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException("User not found.");
+        }
+        return user.get();
+    }
 }

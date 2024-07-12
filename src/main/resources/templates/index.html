@@ -7,6 +7,7 @@
         <h3>Welcome in Event Service API!</h3>
         <div>
             <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+            <div th:if="${loginResult}">[[${loginResult}]]</div>
             <p>Just look for best events in your localization and sing in it!</p>
         </div>
     </div>

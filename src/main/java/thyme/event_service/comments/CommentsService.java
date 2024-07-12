@@ -18,16 +18,12 @@ public class CommentsService {
     private final UserService userService;
 
     public List<CommentsModel> findByEventId(Long id) {
-        List<CommentsModel> comments = commentsRepository.findAllByEvent_Id(id);
-//        if(comments.isEmpty()){
-//            throw new NoSuchElementException("No comments founded.");
-//        }
-        return comments;
+        return commentsRepository.findAllByEvent_Id(id);
     }
 
-    public CommentsModel addComment(NewCommentDto newComment) {
+    public CommentsModel addComment(NewCommentDto newComment, String username) {
 
-        UserModel user = userService.getById(1L);//todo authorisation & authentication
+        UserModel user = userService.getByUsername(username);
 
         CommentsModel comment = new CommentsModel();
         comment.setAuthor(user);

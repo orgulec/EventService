@@ -10,6 +10,8 @@ import thyme.event_service.comments.CommentsService;
 import thyme.event_service.dto.NewCommentDto;
 import thyme.event_service.event.EventService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/comments")
 @RequiredArgsConstructor
@@ -25,17 +27,17 @@ public class CommentsController {
     }
 
     @GetMapping("/new/{eventId}")
-    public String newComment(@PathVariable Long eventId, ModelMap modelMap){
+    public String newComment(@PathVariable Long eventId, final ModelMap modelMap){
         modelMap.addAttribute("eventId", eventId);
         modelMap.addAttribute("newComment",new NewCommentDto());
         return "redirect:/comments/add/{eventId}";
 //        return "comments";
     }
     @PostMapping("/new/{eventId}")
-    public String addComment(@Valid @ModelAttribute("newComment") NewCommentDto newComment, @PathVariable Long eventId, ModelMap modelMap){
+    public String addComment(@Valid @ModelAttribute("newComment") NewCommentDto newComment, @PathVariable Long eventId, ModelMap modelMap, Principal principal){
         newComment.setEvent(eventService.getById(eventId));
         modelMap.addAttribute("newComment", newComment);
-        commentsService.addComment(newComment);
+        commentsService.addComment(newComment, principal.getName());
         return "redirect:/comments/read/{eventId}";
     }
 
