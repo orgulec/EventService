@@ -18,7 +18,7 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping
-public class LoginController {
+class LoginController {
 
     private final AuthenticationManager authenticationManager;
 
@@ -35,23 +35,22 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginDto") LoginDto loginDto, Errors errors, ModelMap modelMap) {
         if(errors.hasErrors()){
-            return "redirect:login/error";
+            return "redirect:login/in";
         }
         Authentication authenticationRequest = UsernamePasswordAuthenticationToken
                 .unauthenticated(loginDto.getUsername(), loginDto.getPassword());
         Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
 
-        modelMap.addAttribute("authentication", authenticationResponse.isAuthenticated());
+        modelMap.addAttribute("authentication", authenticationResponse);
         return "redirect:login/in";
     }
     @GetMapping("/in")
-    public String getIn(@ModelAttribute("authentication") Boolean authentication, ModelMap modelMap){
-        modelMap.addAttribute("loginResult","Successfully logged in!");
-        return "login";
-    }
-    @GetMapping("/error")
-    public String getErrors(@ModelAttribute("authentication") Boolean authentication, ModelMap modelMap){
-        modelMap.addAttribute("loginResult", "Wrong username or password!");
+    public String getIn(@ModelAttribute("authentication") Authentication authentication, ModelMap modelMap){
+        if(authentication.isAuthenticated()){
+            modelMap.addAttribute("loginResult","Successfully logged in!");
+        } else{
+            modelMap.addAttribute("loginResult", "Wrong username or password!");
+        }
         return "login";
     }
 

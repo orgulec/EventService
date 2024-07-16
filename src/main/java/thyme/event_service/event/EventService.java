@@ -3,8 +3,6 @@ package thyme.event_service.event;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
 import thyme.event_service.dto.NewEventDto;
 import thyme.event_service.subscriptions.SubscriptionModel;
@@ -39,11 +37,18 @@ public class EventService {
         return event.get();
     }
 
+    public List<EventModel> getAllByUser(Long userId) {
+//        Optional<UserModel> userOpt = userRepository.findById(userId);
+//        if(userOpt.isEmpty()){
+//            throw new EntityNotFoundException("User not found (id: " + userId + ").");
+//        }
+//        UserModel user = userOpt.get();
+        return eventRepository.findAllByOwner_Id(userId);
+    }
+
     public EventModel signMeIn(long eventId, String username) {
         EventModel event = getById(eventId);
-
         UserModel user = getUserIfExists(username);
-
         Optional<SubscriptionModel> subscription = subscriptionService.getByEventAndUser(event, user);
 
         if (subscription.isEmpty()) {
@@ -99,7 +104,7 @@ public class EventService {
         if (userOpt.isEmpty()) {
             throw new EntityNotFoundException("User not found");
         }
-        UserModel user = userOpt.get();
-        return user;
+        return userOpt.get();
     }
+
 }

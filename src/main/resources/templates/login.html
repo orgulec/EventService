@@ -57,6 +57,10 @@
             font-size: small;
             background-color: #e4e7e7;
         }
+        form > input.mouseover{
+            border: solid darkcyan 2px;
+            box-shadow: #868686 2px 2px 3px;
+        }
         .warn{
             color: red;
             font-size: xx-small;
@@ -98,10 +102,17 @@
                         </td>
                     </tr>
                 </table>
-                <input type="submit" value="Log me in">
+                <input type="submit" id="button1" value="Log me in">
             </form>
         </div>
     </div>
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions';
+        let btn1 = document.getElementById("button1");
+
+        ChangeBorderButton(btn1);
+
+    </script>
 </body>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

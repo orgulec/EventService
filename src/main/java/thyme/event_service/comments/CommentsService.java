@@ -34,4 +34,8 @@ public class CommentsService {
 
         return commentsRepository.save(comment);
     }
+
+    public List<CommentsModel> findByUserId(Long userId) {
+        return commentsRepository.findAllByAuthor_Id(userId);
+    }
 }

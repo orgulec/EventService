@@ -16,7 +16,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/events")
 @RequiredArgsConstructor
-public class EventController {
+class EventController {
 
     private final EventService eventService;
     private final UserService userService;
@@ -47,10 +47,15 @@ public class EventController {
         modelMap.addAttribute("result", eventService.getAll());
         return "events_all";
     }
+    @GetMapping("/all/{userId}")
+    public String getByUser(ModelMap modelMap, @PathVariable Long userId) {
+        modelMap.addAttribute("result", eventService.getAllByUser(userId));
+        return "events_all";
+    }
 
-    @GetMapping("/{id}")
-    public String getById(ModelMap modelMap, @PathVariable long id, Principal principal) {
-        modelMap.addAttribute("result", eventService.getById(id));
+    @GetMapping("/{eventId}")
+    public String getById(ModelMap modelMap, @PathVariable Long eventId, Principal principal) {
+        modelMap.addAttribute("result", eventService.getById(eventId));
         modelMap.addAttribute("user", userService.getByUsername(principal.getName()));
         return "event";
     }

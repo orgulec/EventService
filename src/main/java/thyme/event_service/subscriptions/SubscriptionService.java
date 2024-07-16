@@ -1,6 +1,5 @@
 package thyme.event_service.subscriptions;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import thyme.event_service.user.UserModel;
 import thyme.event_service.user.UserRepository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 @Slf4j
 @Service
@@ -21,14 +19,11 @@ public class SubscriptionService {
 
     public List<SubscriptionModel> getAllByEvent(long eventId) {
         List<SubscriptionModel> subscription = subscriptionRepository.findAllByEvent_Id(eventId);
-//        if(subscription.isEmpty()){
-//            throw new NoSuchElementException("No subscription founded");
-//        }
         return subscription;
     }
-
-    public boolean checkIfSubscriptionExist(EventModel event, UserModel user){
-        return !subscriptionRepository.findAllByEventAndSubscriber(event,user).isEmpty();
+    public List<SubscriptionModel> getAllByUser(long userId) {
+        List<SubscriptionModel> subscription = subscriptionRepository.findAllBySubscriber_Id(userId);
+        return subscription;
     }
 
     public Optional<SubscriptionModel> getByEventAndUser(EventModel event, UserModel user){
@@ -47,13 +42,5 @@ public class SubscriptionService {
         subscription.ifPresent(subscriptionRepository::delete);
     }
 
-    private UserModel getUserIfExists(String username) {
-        Optional<UserModel> userOpt = userRepository.findByUsername(username);
-        if(userOpt.isEmpty()){
-            throw new EntityNotFoundException("User not found");
-        }
-        UserModel user = userOpt.get();
-        return user;
-    }
 
 }

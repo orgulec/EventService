@@ -15,14 +15,19 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/comments")
 @RequiredArgsConstructor
-public class CommentsController {
+class CommentsController {
 
     private final CommentsService commentsService;
     private final EventService eventService;
 
     @GetMapping("/read/{eventId}")
-    public String readComments(@PathVariable Long eventId, final ModelMap modelMap){
+    public String readEventComments(@PathVariable Long eventId, final ModelMap modelMap){
         modelMap.addAttribute("readComments", commentsService.findByEventId(eventId));
+        return "comments";
+    }
+    @GetMapping("/read/user/{userId}")
+    public String readUserComments(@PathVariable Long userId, final ModelMap modelMap){
+        modelMap.addAttribute("readComments", commentsService.findByUserId(userId));
         return "comments";
     }
 
@@ -31,7 +36,6 @@ public class CommentsController {
         modelMap.addAttribute("eventId", eventId);
         modelMap.addAttribute("newComment",new NewCommentDto());
         return "redirect:/comments/add/{eventId}";
-//        return "comments";
     }
     @PostMapping("/new/{eventId}")
     public String addComment(@Valid @ModelAttribute("newComment") NewCommentDto newComment, @PathVariable Long eventId, ModelMap modelMap, Principal principal){

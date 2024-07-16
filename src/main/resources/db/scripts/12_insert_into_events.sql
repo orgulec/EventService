@@ -6,4 +6,6 @@ VALUES
     ('Music Rock Festival','Coroczna imprezka jakich mało w Polsce już teraz w Warszawie!!','Poland','Warsaw','Aleje Ujazdowskie','33','2025-03-20T21:00:00.000',150.00,false,7),
     ('Science for kids!','Science Kids is the online home of science & technology for children around the world.Learn more with our fun science experiments, cool facts, free games, activities, lesson plans, quizzes, videos, photos and science fair project ideas.','Germany','Berlin','Albertstrasse','82/10','2024-09-02T10:00:00.000',0.00,true,2),
     ('Rock Poland','Największa rockowa imprezka w Polsce jedzie kolejny rock z rzędu!!!','Poland','Gdansk','Bałtycka','27','2024-07-15T21:30:00.000',99.90,true,7),
-    ('Wodne Wakacje!','Zapraszamy na najlepsze wakacje dla dzieci w poznańskim Aquaparku! Najlepsza okazja by nauczyć się pływać i zrelaksować w czystej wodzie!','Poland','Poznan','Wrocławska','141','2024-07-01T10:00:00.000',0.00,true,4)
+    ('Grill w Rżewie!','Wszyscy do Rżewa na grilla!!!','Poland','Rżew','Bałtycka','11','2025-03-15T21:30:00.000',9.90,false,1),
+    ('Wodne Wakacje!','Zapraszamy na najlepsze wakacje dla dzieci w poznańskim Aquaparku! Najlepsza okazja by nauczyć się pływać i zrelaksować w czystej wodzie!','Poland','Poznan','Wrocławska','141','2024-07-01T10:00:00.000',0.00,true,4),
+    ('ZIMNA ZIMA!','Zapraszamy na najlepsze ferie dla dzieci w poznańskim Aquaparku! Najlepsza okazja by nauczyć się pływać i zrelaksować w czystej wodzie!','Poland','Poznan','Wrocławska','141','2024-12-10T10:00:00.000',0.00,true,1)

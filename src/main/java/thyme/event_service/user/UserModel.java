@@ -36,13 +36,13 @@ public class UserModel {
     private String role;
     private Integer age;
 
-    @OneToMany(mappedBy = "owner")
-    private Set<EventModel> myEvents;
+    @OneToMany(mappedBy = "owner", cascade=CascadeType.ALL)
+    private List<EventModel> myEvents;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade=CascadeType.ALL)
     private List<CommentsModel> comments;
 
-    @OneToMany(mappedBy = "subscriber")
+    @OneToMany(mappedBy = "subscriber", cascade=CascadeType.ALL)
     private List<SubscriptionModel> subscriptions;
 
 

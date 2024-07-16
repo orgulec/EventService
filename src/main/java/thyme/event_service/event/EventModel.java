@@ -22,6 +22,7 @@ public class EventModel {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="owner_id")
     private UserModel owner;
 
     private String title;

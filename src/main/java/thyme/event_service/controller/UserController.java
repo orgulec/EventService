@@ -14,7 +14,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserController {
+class UserController {
 
         private final UserService userService;
 
@@ -31,9 +31,4 @@ public class UserController {
             return "user";
         }
 
-//    @GetMapping(path = "/foo")
-//    public void foo(HttpSession session) {
-//        String sessionId = session.getId();
-//        session.toString();
-//    }
 }

@@ -32,19 +32,19 @@
                         <td class="left">Subscriptions:
                             <div th:if="${!result.getSubscriptions().contains(user)}">
                                 <form th:action="@{/events/subscribe/__${result.getId()}__}" method="POST" id = "subscribe">
-                                    <input type="submit" id="button2" value="Sign me in!">
+                                    <input type="submit" id="button1" value="Sign me in!">
                                 </form>
                             </div>
                             <p th:if="${result.getSubscriptions().contains(user)}" class="redText">Signed!</p>
                         </td>
                         <td class="right">
-                            <p class="description" th:text="'Already signed: ' + ${result.getSubscriptions().size()}"></p>
+                            <p class="description" th:text="'Signed: ' + ${result.getSubscriptions().size()}"></p>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">Comments:<br>
                             <form th:action="@{/comments/read/__${result.id}__}" method="GET">
-                                <input type="submit" id="button1" value="Show me all">
+                                <input type="submit" id="button2" value="Show me all">
                             </form>
                         </td>
                         <td class="right">
@@ -60,18 +60,16 @@
                 <hr>
             </div>
         </div>
-    <script>
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions';
         let btn1 = document.getElementById("button1");
         let btn2 = document.getElementById("button2");
 
-        changeBorderButton(btn1);
-        changeBorderButton(btn2);
+        ChangeBorderButton(btn1);
+        ChangeBorderButton(btn2);
 
         let subs = document.getElementById("subscribe");
-        function changeBorderButton(btn){
-            btn.addEventListener('mouseover', f => btn.classList.add("mouseover"));
-            btn.addEventListener('mouseout', f => btn.classList.remove("mouseover"));
-        }
+
     </script>
 </body>
 <footer th:replace="~{fragments/footer :: footer}"></footer>

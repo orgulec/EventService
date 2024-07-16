@@ -2,6 +2,7 @@ package thyme.event_service.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,8 +45,8 @@ public class GlobalExceptionHandler {
         mav.setViewName("/errors/badRequest");
         return mav;
     }
-    @ExceptionHandler(InternalAuthenticationServiceException.class)
-    public ModelAndView handleInternalAuthenticationServiceException (InternalAuthenticationServiceException  ex){
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ModelAndView handleUsernameNotFoundException (UsernameNotFoundException  ex){
         ModelAndView mav = new ModelAndView();
         ex.printStackTrace();
         mav.addObject("errorMessage", ex.getMessage());

@@ -7,11 +7,11 @@ import thyme.event_service.user.UserModel;
 
 import java.util.Collection;
 import java.util.List;
-public class UserDetailsAdapter implements UserDetails {
+class UserDetailsAdapter implements UserDetails {
 
     private final UserModel user;
 
-    public UserDetailsAdapter(final UserModel user) {
+    UserDetailsAdapter(final UserModel user) {
         this.user = user;
     }
 

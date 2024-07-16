@@ -24,7 +24,7 @@
             <tr>
                 <td class="left">
                     *Comment:<br>
-                    <input type="submit" value="Add comment">
+                    <input type="submit" id="button" value="Add comment">
                 </td>
                 <td class="right">
                     <label>
@@ -37,3 +37,10 @@
         </table>
     </form>
 </div>
+<script type="module">
+    import { ChangeBorderButton } from '/scripts/globalFunctions.js';
+
+    let btn = document.getElementById("button");
+    ChangeBorderButton(btn);
+
+</script>

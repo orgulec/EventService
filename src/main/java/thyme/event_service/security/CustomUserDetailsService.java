@@ -11,7 +11,7 @@ import thyme.event_service.user.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
