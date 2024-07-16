@@ -10,11 +10,17 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-
     public UserModel getById(long id) {
         Optional<UserModel> user = userRepository.findById(id);
         if(user.isEmpty()){
-            throw new EntityNotFoundException("User not found.");
+            throw new EntityNotFoundException("User not found (Id: "+id+").");
+        }
+        return user.get();
+    }
+    public UserModel getByUsername(String username) {
+        Optional<UserModel> user = userRepository.findByUsername(username);
+        if(user.isEmpty()){
+            throw new EntityNotFoundException("User not found (Username: "+username+").");
         }
         return user.get();
     }

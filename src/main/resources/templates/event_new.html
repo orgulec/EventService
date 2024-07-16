@@ -108,19 +108,17 @@
                         </td>
                     </tr>
                 </table>
-                <input type="submit" id="button" value="Create new Event">
+                <input type="submit" id="button1" value="Create new Event">
             </form>
         </div>
     </div>
-<script>
-    let btn = document.getElementById("button");
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions.js';
 
-    changeBorderButton(btn);
-    function changeBorderButton(b){
-        b.addEventListener('mouseover', f => b.classList.add("mouseover"));
-        b.addEventListener('mouseout', f => b.classList.remove("mouseover"));
-    }
-</script>
+        let btn = document.getElementById("button1");
+        ChangeBorderButton(btn);
+
+    </script>
 </body>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

@@ -3,67 +3,59 @@
 <head th:replace="~{fragments/head :: head}"></head>
 
 <body>
-<div class="box">
-    <h3>Events list</h3>
-    <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
+    <div class="box">
+        <h3>Events list</h3>
+        <nav id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></nav>
 
-    <div class="searchBelt">
-        <span class="left" id="clock"></span>
-        <form th:action="@{/events/search}" method="GET">
-            <span class="right">
-                <label>
-                    <input type="text" name="toFind" placeholder="Type text for search...">
-                    <input type="submit" id="button" value="&#10233;">
-                </label>
-            </span>
-        </form>
+        <div class="searchBelt">
+            <span class="left" id="clock"></span>
+            <form th:action="@{/events/search}" method="GET">
+                <span class="right">
+                    <label>
+                        <input type="text" name="toFind" placeholder="Type text for search...">
+                        <input type="submit" id="button1" value="&#10233;">
+                    </label>
+                </span>
+            </form>
+        </div>
+
+        <div th:if="${result.size() > 0}">
+            <table class="tableOne">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Free</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="event : ${result}">
+                    <td>[[${event.id}]]</td>
+                    <td><a th:href="@{/events/__${event.id}__}">[[${event.title}]]</a></td>
+                    <td>[[${event.getDateFormatted}]]</td>
+                    <td>[[${event.address}]]</td>
+                    <td>
+                        <p th:if="${event.cost>0}">No</p>
+                        <p th:if="${event.cost==0}" class="redText">Yes!</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div th:if="${result.size() > 0}">
-        <table class="tableOne">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Date</th>
-                <th scope="col">Address</th>
-                <th scope="col">Free</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="event : ${result}">
-                <td>[[${event.id}]]</td>
-                <td><a th:href="@{'/events/' + ${event.id}}">[[${event.title}]]</a></td>
-                <td>[[${event.getDateFormatted}]]</td>
-                <td>[[${event.address}]]</td>
-                <td>
-                    <p th:if="${event.cost>0}">No</p>
-                    <p th:if="${event.cost==0}" class="redText">Yes!</p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions.js';
+        import { SetTime } from '/scripts/globalFunctions.js';
 
-<script>
-    let clock = document.getElementById("clock");
-    setInterval(setTime, 1000);
+        let clock = document.getElementById("clock");
+        setInterval(SetTime, 200);
 
-    let btn = document.getElementById("button");
-    changeBorderButton(btn);
-
-    function changeBorderButton(b){
-        b.addEventListener('mouseover', a => b.classList.add("mouseover"));
-        b.addEventListener('mouseout', a => b.classList.remove("mouseover"));
-    }
-    function setTime() {
-        let time = new Date();
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const currentDayOfWeek = daysOfWeek[time.getDay()];
-        clock.innerHTML = "Today it's " + currentDayOfWeek + ", " + time.getDay() + "." + time.getMonth() + "." + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "<br>";
-    }
-</script>
+        let btn = document.getElementById("button1");
+        ChangeBorderButton(btn);
+    </script>
 
 </body>
 

@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SubscriptionRepository extends JpaRepository<SubscriptionModel, Long> {
+interface SubscriptionRepository extends JpaRepository<SubscriptionModel, Long> {
 
-    public List<SubscriptionModel> findAllByEvent_Id(Long id);
+    List<SubscriptionModel> findAllByEvent_Id(Long eventId);
 
-    public List<SubscriptionModel> findAllBySubscriber_Id(Long id);
+    List<SubscriptionModel> findAllBySubscriber_Id(Long userId);
 
-    public List<SubscriptionModel> findAllByEventAndSubscriber(EventModel event, UserModel user);
-    public Optional<SubscriptionModel> findByEvent_IdAndSubscriber_Id(long eventId, long userId);
+    List<SubscriptionModel> findAllByEventAndSubscriber(EventModel event, UserModel user);
+    Optional<SubscriptionModel> findByEvent_IdAndSubscriber_Id(long eventId, long userId);
 
 }

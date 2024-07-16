@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Event Service Login page</title>
+    <style>
+        body{
+            background-color: #b9b8b8;
+            color: #2f2f2f;
+            display: flex;
+            flex-basis: max-content;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, serif;
+        }
+        .box{
+            max-width: 85%;
+            min-width: 50%;
+            margin-top: 15px;
+            margin-left: 15%;
+            margin-right: 15%;
+            text-align: center;
+            padding: 12px;
+            border: #4d4d4d solid 1px;
+            border-radius: 18px;
+            box-shadow: #767b7c 3px 3px 7px;
+            background-color: #d6d9d9;
+        }
+        .inputTab > td.right{
+            width: 80%;
+        }
+        td.left {
+            width: 25%;
+            text-align: right;
+            font-size: x-small;
+            padding: 7px;
+            margin-top: 7px;
+            border-right: #afafaf solid 1px;
+            vertical-align: top;
+        }
+        td.right {
+            width: 75%;
+            text-align: left;
+            font-size: small;
+            padding: 7px;
+        }
+        input, textarea{
+            color: #525252;
+            border-radius: 5px;
+            border: #afafaf solid 2px;
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 3px;
+            padding: 2px;
+            font-size: small;
+            background-color: #e4e7e7;
+        }
+        form > input.mouseover{
+            border: solid darkcyan 2px;
+            box-shadow: #868686 2px 2px 3px;
+        }
+        .warn{
+            color: red;
+            font-size: xx-small;
+        }
+        h3{
+            color: #006060;
+            text-shadow: #868686 2px 2px 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h3>You need to log in Event Service!</h3>
+        <hr>
+        <div>
+            <form th:action="@{/login}" th:object="${loginDto}" method="POST">
+                <table class="inputTab">
+                    <tr>
+                        <td class="left">
+                            Username:<br>
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="username" th:field="*{username}">
+                                <span class="warn" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                            Password:<br>
+                        </td>
+                        <td class="right">
+                            <label>
+                                <input type="text" name="password" th:field="*{password}">
+                                <span class="warn" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" id="button1" value="Log me in">
+            </form>
+        </div>
+    </div>
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions';
+        let btn1 = document.getElementById("button1");
+
+        ChangeBorderButton(btn1);
+
+    </script>
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</html>

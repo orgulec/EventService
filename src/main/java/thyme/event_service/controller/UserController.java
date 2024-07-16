@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import thyme.event_service.user.UserModel;
 import thyme.event_service.user.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserController {
+class UserController {
 
         private final UserService userService;
 
@@ -22,4 +24,11 @@ public class UserController {
             modelMap.addAttribute("result", user);
             return "user";
         }
+        @GetMapping("/me")
+        public String show(final ModelMap modelMap, Principal principal){
+            UserModel user = userService.getByUsername(principal.getName());
+            modelMap.addAttribute("result", user);
+            return "user";
+        }
+
 }

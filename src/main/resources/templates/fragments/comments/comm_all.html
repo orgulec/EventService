@@ -6,7 +6,7 @@
         <table class="comment">
             <tr>
                 <td class="left">
-                    <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.nickname}]]:</a>
+                    <a class="owner" th:href="@{'/user/' + ${comm.author.id}}">[[${comm.author.username}]]:</a>
                     <p class="description2" th:text="${comm.getDateFormatted()}"></p>
                     <p th:if="${comm.rating>0}" class="description2" th:utext="'Rating: ' + ${comm.rating} + '/10'"></p>
                 </td>

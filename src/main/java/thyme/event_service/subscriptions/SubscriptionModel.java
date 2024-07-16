@@ -17,9 +17,11 @@ public class SubscriptionModel {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="subscriber_id")
     private UserModel subscriber;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="event_id")
     private EventModel event;
 
 }

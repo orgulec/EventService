@@ -4,7 +4,7 @@
 
 <body>
     <div class="box">
-        <h3>[[${result.title}]]</h3>
+        <h3 th:text="${result.title}!=null ? ${result.title} : 'Event not found!'"></h3>
             <div id="navig" th:replace="~{fragments/navi_bar :: navi_bar}"></div>
             <div th:if="${result}">
                 <table class="doubleTable">
@@ -30,26 +30,26 @@
                     </tr>
                     <tr th:if="${result.active==true}">
                         <td class="left">Subscriptions:
-                            <!--                            <p th:if="${!result.getSubscriptions().contains(user)}">-->
-                            <form th:action="@{/events/subscribe/__${result.getId()}__}" method="POST" id = "subscribe">
-                                <input type="submit" id="button2" value="Sign me in!">
-                            </form>
-                            <!--                            </p>-->
-                            <!--                            <p th:if="${result.getSubscriptions().contains(user)}" class="redText">Yes!</p>-->
+                            <div th:if="${!result.getSubscriptions().contains(user)}">
+                                <form th:action="@{/events/subscribe/__${result.getId()}__}" method="POST" id = "subscribe">
+                                    <input type="submit" id="button1" value="Sign me in!">
+                                </form>
+                            </div>
+                            <p th:if="${result.getSubscriptions().contains(user)}" class="redText">Signed!</p>
                         </td>
                         <td class="right">
-                            <p class="description" th:text="'Already signed: ' + ${result.getSubscriptions().size()}"></p>
+                            <p class="description" th:text="'Signed: ' + ${result.getSubscriptions().size()}"></p>
                         </td>
                     </tr>
                     <tr>
                         <td class="left">Comments:<br>
                             <form th:action="@{/comments/read/__${result.id}__}" method="GET">
-                                <input type="submit" id="button1" value="Show all">
+                                <input type="submit" id="button2" value="Show me all">
                             </form>
                         </td>
                         <td class="right">
                             <div class="comment" th:each="comm : ${result.comments}">
-                                <a class="owner" th:href="@{/user/__${comm.author.id}__}">[[${comm.author.nickname}]]:</a>
+                                <a class="owner" th:href="@{/user/__${comm.author.id}__}">[[${comm.author.username}]]:</a>
                                 <span class="description2" th:text="' ('+${comm.getDateFormatted()}+')'"></span>
                                 <p class="description" th:text="${comm.message}"></p>
                                 <p th:if="${comm.rating>0}" class="additional" th:text="'Rating: ' + ${comm.rating} + '/10'"></p>
@@ -60,18 +60,16 @@
                 <hr>
             </div>
         </div>
-    <script>
+    <script type="module">
+        import { ChangeBorderButton } from '/scripts/globalFunctions';
         let btn1 = document.getElementById("button1");
         let btn2 = document.getElementById("button2");
 
-        changeBorderButton(btn1);
-        changeBorderButton(btn2);
+        ChangeBorderButton(btn1);
+        ChangeBorderButton(btn2);
 
         let subs = document.getElementById("subscribe");
-        function changeBorderButton(btn){
-            btn.addEventListener('mouseover', f => btn.classList.add("mouseover"));
-            btn.addEventListener('mouseout', f => btn.classList.remove("mouseover"));
-        }
+
     </script>
 </body>
 <footer th:replace="~{fragments/footer :: footer}"></footer>

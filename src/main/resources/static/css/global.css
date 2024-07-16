@@ -20,7 +20,6 @@ body{
     border-radius: 18px;
     box-shadow: #767b7c 3px 3px 7px;
     background-color: #d6d9d9;
-
 }
 .tableOne{
     border: solid #afafaf 2px;
@@ -30,12 +29,12 @@ body{
     justify-content: center;
     padding: 7px;
 }
-.inputTab > td.right{
-    width: 80%;
-}
 .tableOne td{
     border-top: #afafaf solid 1px;
     padding: 5px;
+}
+.inputTab > td.right{
+    width: 80%;
 }
 td.left {
     width: 20%;
@@ -51,7 +50,6 @@ td.right {
     text-align: left;
     font-size: small;
     padding: 7px;
-
 }
 thead{
     padding: 5px;

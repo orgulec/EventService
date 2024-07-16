@@ -1,10 +1,11 @@
 <header th:fragment ="navi_bar">
     <hr>
         <div id="links">
-            <a class="nav" th:href="@{/events/hello}"> Welcome </a>
+            <a class="nav" th:href="@{/login}"> Welcome </a>
+<!--            <a class="nav" th:href="@{/events/hello}"> Welcome </a>-->
             <a class="nav" th:href="@{/events/all}"> Show all Events </a>
             <a class="nav" th:href="@{/events/new}"> Add new Event </a>
-            <a class="nav" th:href="@{/user/1}"> User </a>
+            <a class="nav" th:href="@{/user/me}"> My Profile </a>
             <a class="nav" th:href="@{/events/bye}"> Goodbye </a>
         </div>
     <hr>

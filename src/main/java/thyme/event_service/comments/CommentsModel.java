@@ -21,9 +21,11 @@ public class CommentsModel {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="author_id")
     private UserModel author;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="event_id")
     private EventModel event;
 
     private String message;
